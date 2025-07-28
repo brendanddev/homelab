@@ -1,2 +1,1 @@
-# homelab
-A collection of files
+# Brendan's Homelab Server
