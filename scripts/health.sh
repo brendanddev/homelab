@@ -2,6 +2,7 @@
 
 # Displays system health information
 # Thresholds can be overridden in ~/health.conf
+# Usage: ./health.sh [--log <file>]
 
 CONFIG_FILE="${HOME}/health.conf"
 DISK_THRESHOLD=85
