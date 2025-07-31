@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Displays system health information
+# Thresholds can be overridden in ~/health.conf
 
 CONFIG_FILE="${HOME}/health.conf"
 DISK_THRESHOLD=85
@@ -101,3 +102,19 @@ get_network_info() {
     echo -e "\n${CYAN}Active Network Connections (Top 10):${NC}"
     netstat -tuln 2>/dev/null | head -15 || ss -tuln | head -15
 }
+
+# Main func to display all health info
+main() {
+    echo "=== System Health Report ==="
+    echo "Uptime: $(get_uptime)"
+    echo
+    get_memory_usage
+    get_cpu_usage
+    get_disk_usage
+    get_temperature
+    get_system_errors
+    get_system_load
+    get_network_info
+}
+
+main
