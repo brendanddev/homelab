@@ -1,3 +1,7 @@
+
+# =====================
+# Archive and Package Files
+# =====================
 *.tar
 *.tar.*
 *.jar
@@ -6,9 +10,48 @@
 *.deb
 *.zip
 *.tgz
+
+# =====================
+# Log Files
+# =====================
 *.log
 *.log.*
+
+# =====================
+# Signature Files
+# =====================
 *.sig
 
+# =====================
+# Source and Build Directories
+# =====================
 pkg/
 src/
+
+# Environment files
+.env
+
+# =====================
+# Docker-related Files
+# =====================
+*.pid
+*.sock
+docker-compose.override.yml
+
+# =====================
+# Editor and IDE Files
+# =====================
+.vscode/
+.idea/
+*.swp
+*~
+
+# =====================
+# Operating System Files
+# =====================
+.DS_Store
+Thumbs.db
+
+# =====================
+# Miscellaneous
+# =====================
