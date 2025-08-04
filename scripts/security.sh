@@ -5,6 +5,18 @@
 # Usage: ./security.sh
 
 
+LOGGING=false
+LOGFILE="/var/log/homelab_logs.log"
+
+# Check if logging is enabled
+# If --log is passed as an argument, enable logging
+for arg in "$@"; do
+    if [ "$arg" == "--log" ]; then
+        LOGGING=true
+        sudo touch "$LOGFILE" && sudo chmod 644 "$LOGFILE"
+    fi
+done
+
 # Color codes for output
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -16,13 +28,21 @@ NC='\033[0m'
 print_status() {
     local status=$1
     local message=$2
+    local timestamp="[$(date '+%Y-%m-%d %H:%M:%S')]"
+    local output=""
     case $status in
-        "OK") echo -e "${GREEN}[OK]${NC} $message" ;;
-        "WARNING") echo -e "${YELLOW}[WARNING]${NC} $message" ;;
-        "ERROR") echo -e "${RED}[ERROR]${NC} $message" ;;
-        "INFO") echo -e "${BLUE}[INFO]${NC} $message" ;;
-        *) echo "$message" ;;
+        "OK") output="${GREEN}[OK]${NC} $message" ;;
+        "WARNING") output="${YELLOW}[WARNING]${NC} $message" ;;
+        "ERROR") output="${RED}[ERROR]${NC} $message" ;;
+        "INFO") output="${BLUE}[INFO]${NC} $message" ;;
+        *) output="$message" ;;
     esac
+
+    echo -e "$output"
+
+    if [ "$LOGGING" = true ]; then
+        echo -e "$timestamp [$status] $message" >> "$LOGFILE"
+    fi
 }
 
 # Require root privileges to run
